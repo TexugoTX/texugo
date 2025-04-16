@@ -108,6 +108,53 @@
     .novo-post button:hover {
       background-color: #45a049;
     }
+
+    /* Painel do usuário */
+    .usuario-panel {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .usuario-panel h3 {
+      font-size: 18px;
+    }
+
+    .usuario-panel .info {
+      margin: 10px 0;
+    }
+
+    .usuario-panel .info span {
+      font-weight: bold;
+    }
+
+    .usuario-panel button {
+      background-color: #1a73e8;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .usuario-panel button:hover {
+      background-color: #166acb;
+    }
+
+    /* Formulário para upload de foto de perfil */
+    .foto-perfil {
+      margin-top: 20px;
+    }
+
+    .foto-perfil input {
+      margin-top: 10px;
+    }
+
+    /* Postagem com foto */
+    .nova-imagem {
+      margin-top: 10px;
+    }
+
   </style>
 </head>
 <body>
@@ -130,6 +177,7 @@
   <div class="feed-container">
     <div class="novo-post">
       <textarea id="conteudoPost" rows="3" placeholder="Compartilhe algo com o mundo..."></textarea>
+      <input type="file" id="imagemPost" class="nova-imagem" accept="image/*">
       <button onclick="enviarPost()">Novo Post</button>
     </div>
 
@@ -141,8 +189,81 @@
         <p>Esse é um post de exemplo com o visualTX!</p>
       </div>
     </div>
+
+    <!-- Painel de usuário (visível após cadastro) -->
+    <div class="usuario-panel" id="usuarioPanel">
+      <h3>Meu Painel</h3>
+      <div class="info">
+        <span>Nome: </span><span id="nomeUsuario">Usuário Exemplo</span>
+      </div>
+      <div class="info">
+        <span>Seguidores: </span><span id="seguidores">50</span>
+      </div>
+      <div class="info">
+        <span>Seguindo: </span><span id="seguindo">80</span>
+      </div>
+      <div class="foto-perfil">
+        <span>Alterar Foto de Perfil:</span>
+        <input type="file" id="fotoPerfil" accept="image/*">
+        <button onclick="alterarFotoPerfil()">Alterar Foto</button>
+      </div>
+      <div>
+        <button onclick="alterarSenha()">Alterar Senha</button>
+      </div>
+    </div>
   </div>
 
-  <!-- Firebase + script virá aqui depois -->
+  <script>
+    // Função para simular o envio do post
+    function enviarPost() {
+      const conteudo = document.getElementById('conteudoPost').value;
+      const imagem = document.getElementById('imagemPost').files[0];
+      const postDiv = document.createElement('div');
+      postDiv.classList.add('post');
+      
+      const h3 = document.createElement('h3');
+      h3.textContent = '📣 Usuário Logado'; // Exemplo de nome de usuário
+      const p = document.createElement('p');
+      p.textContent = conteudo;
+      
+      if (imagem) {
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(imagem);
+        img.style.width = '100%';
+        img.style.borderRadius = '12px';
+        postDiv.appendChild(img);
+      }
+      
+      postDiv.appendChild(h3);
+      postDiv.appendChild(p);
+      document.getElementById('feed').appendChild(postDiv);
+      
+      // Limpar campos
+      document.getElementById('conteudoPost').value = '';
+      document.getElementById('imagemPost').value = '';
+    }
+
+    // Simula o painel do usuário após o cadastro
+    function mostrarPainel() {
+      document.getElementById('usuarioPanel').style.display = 'block';
+    }
+
+    // Função para alterar a foto de perfil
+    function alterarFotoPerfil() {
+      const fotoPerfil = document.getElementById('fotoPerfil').files[0];
+      if (fotoPerfil) {
+        alert('Foto de perfil alterada!');
+      }
+    }
+
+    // Função para alterar senha (exemplo simples)
+    function alterarSenha() {
+      alert('Senha alterada!');
+    }
+
+    // Simulação de login (após cadastro)
+    mostrarPainel();
+  </script>
+
 </body>
 </html>
