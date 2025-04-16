@@ -109,10 +109,23 @@
       background-color: #45a049;
     }
 
-    /* Painel do usuário */
+    /* Painel do usuário na barra lateral direita */
     .usuario-panel {
+      width: 250px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+      position: fixed;
+      right: 20px;
+      top: 80px;
       display: none;
-      margin-top: 20px;
+    }
+
+    .usuario-panel img {
+      width: 100%;
+      border-radius: 50%;
+      margin-bottom: 15px;
     }
 
     .usuario-panel h3 {
@@ -189,27 +202,28 @@
         <p>Esse é um post de exemplo com o visualTX!</p>
       </div>
     </div>
+  </div>
 
-    <!-- Painel de usuário (visível após cadastro) -->
-    <div class="usuario-panel" id="usuarioPanel">
-      <h3>Meu Painel</h3>
-      <div class="info">
-        <span>Nome: </span><span id="nomeUsuario">Usuário Exemplo</span>
-      </div>
-      <div class="info">
-        <span>Seguidores: </span><span id="seguidores">50</span>
-      </div>
-      <div class="info">
-        <span>Seguindo: </span><span id="seguindo">80</span>
-      </div>
-      <div class="foto-perfil">
-        <span>Alterar Foto de Perfil:</span>
-        <input type="file" id="fotoPerfil" accept="image/*">
-        <button onclick="alterarFotoPerfil()">Alterar Foto</button>
-      </div>
-      <div>
-        <button onclick="alterarSenha()">Alterar Senha</button>
-      </div>
+  <!-- Painel de usuário na lateral direita -->
+  <div class="usuario-panel" id="usuarioPanel">
+    <img src="https://via.placeholder.com/150" alt="Foto de Perfil">
+    <h3>Meu Painel</h3>
+    <div class="info">
+      <span>Nome: </span><span id="nomeUsuario">Usuário Exemplo</span>
+    </div>
+    <div class="info">
+      <span>Seguidores: </span><span id="seguidores">50</span>
+    </div>
+    <div class="info">
+      <span>Seguindo: </span><span id="seguindo">80</span>
+    </div>
+    <div class="foto-perfil">
+      <span>Alterar Foto de Perfil:</span>
+      <input type="file" id="fotoPerfil" accept="image/*">
+      <button onclick="alterarFotoPerfil()">Alterar Foto</button>
+    </div>
+    <div>
+      <button onclick="alterarSenha()">Alterar Senha</button>
     </div>
   </div>
 
@@ -218,6 +232,12 @@
     function enviarPost() {
       const conteudo = document.getElementById('conteudoPost').value;
       const imagem = document.getElementById('imagemPost').files[0];
+
+      if (conteudo.trim() === '') {
+        alert('O post não pode estar em branco!');
+        return;
+      }
+
       const postDiv = document.createElement('div');
       postDiv.classList.add('post');
       
