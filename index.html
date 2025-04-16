@@ -1,111 +1,163 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard do Texugo</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            background-color: #f4f4f4;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel do Texugo</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        /* Barra superior */
-        .topbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 60px;
-            background-color: #007acc;
-            color: white;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
 
-        .topbar h1 {
-            font-size: 20px;
-            margin: 0;
-        }
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 60px;
+      width: 100%;
+      background-color: #007acc;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
 
-        /* Layout principal */
-        .container {
-            display: flex;
-            margin-top: 60px; /* espaço para a barra */
-            min-height: 100vh;
-        }
+    .topbar h1 {
+      margin: 0;
+      font-size: 22px;
+    }
 
-        /* Menu lateral */
-        .sidebar {
-            width: 200px;
-            background-color: #e0e0e0;
-            padding: 20px;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-        }
+    .container {
+      display: flex;
+      margin-top: 60px;
+      min-height: 100vh;
+    }
 
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
+    .sidebar {
+      width: 220px;
+      background-color: #e0e0e0;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
 
-        .sidebar li {
-            margin: 15px 0;
-        }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
 
-        .sidebar a {
-            text-decoration: none;
-            color: #007acc;
-            font-weight: bold;
-        }
+    .sidebar li {
+      margin: 15px 0;
+    }
 
-        /* Área de postagens */
-        .content {
-            flex: 1;
-            padding: 20px;
-        }
+    .sidebar a {
+      text-decoration: none;
+      color: #007acc;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
 
-        .post {
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-    </style>
+    .sidebar .material-icons {
+      margin-right: 8px;
+    }
+
+    .content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .post {
+      background-color: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    form {
+      background-color: white;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: Arial, sans-serif;
+    }
+
+    button {
+      background-color: #007acc;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #005e99;
+    }
+
+  </style>
 </head>
 <body>
 
-    <div class="topbar">
-        <h1>🦡 Painel do Texugo</h1>
+  <div class="topbar">
+    <h1>🦡 Painel do Texugo</h1>
+  </div>
+
+  <div class="container">
+    <div class="sidebar">
+      <ul>
+        <li><a href="#"><span class="material-icons">home</span>Início</a></li>
+        <li><a href="#"><span class="material-icons">description</span>Postagens</a></li>
+        <li><a href="#"><span class="material-icons">settings</span>Configurações</a></li>
+        <li><a href="#"><span class="material-icons">logout</span>Sair</a></li>
+      </ul>
     </div>
 
-    <div class="container">
-        <div class="sidebar">
-            <ul>
-                <li><a href="#">🏠 Início</a></li>
-                <li><a href="#">📄 Postagens</a></li>
-                <li><a href="#">⚙️ Configurações</a></li>
-                <li><a href="#">🚪 Sair</a></li>
-            </ul>
-        </div>
+    <div class="content">
 
-        <div class="content">
-            <div class="post">
-                <h2>Primeira Postagem</h2>
-                <p>Este é um exemplo de conteúdo principal. Aqui você pode mostrar suas postagens, atualizações ou informações do bot.</p>
-            </div>
+      <form>
+        <h2>Nova Postagem</h2>
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" placeholder="Digite o título da postagem" />
 
-            <div class="post">
-                <h2>Outra Postagem</h2>
-                <p>Você pode adicionar quantos blocos de conteúdo quiser aqui.</p>
-            </div>
-        </div>
+        <label for="conteudo">Conteúdo:</label>
+        <textarea id="conteudo" name="conteudo" rows="5" placeholder="Digite o conteúdo aqui..."></textarea>
+
+        <button type="submit">Publicar</button>
+      </form>
+
+      <div class="post">
+        <h2>Boas-vindas ao Painel!</h2>
+        <p>Este é um painel interativo para o seu projeto. Aqui você poderá visualizar e adicionar conteúdos facilmente.</p>
+      </div>
+
+      <div class="post">
+        <h2>Exemplo de Postagem</h2>
+        <p>Este bloco representa uma postagem comum dentro do painel. Você pode usar isso para mostrar logs, notícias ou dados.</p>
+      </div>
+
     </div>
+  </div>
 
 </body>
 </html>
