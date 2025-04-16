@@ -1,133 +1,148 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Painel Texugo</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Painel Social do Texugo</title>
   <style>
-    /* ... (estilos iguais ao layout anterior, você pode colar o CSS do exemplo anterior aqui) ... */
-    /* Acrescente esse estilo no final para o formulário de post */
-    .post-form {
-      background-color: #ffffff;
-      border: 2px dashed #90caf9;
-      padding: 15px;
-      border-radius: 12px;
-      margin-bottom: 20px;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
     }
 
-    .post-form textarea {
-      width: 100%;
-      padding: 10px;
-      resize: vertical;
-      border-radius: 10px;
-      border: 1px solid #ccc;
+    /* Sidebar estilo TexugoRDK */
+    .sidebar {
+      width: 220px;
+      background-color: #ffffff;
+      border-right: 3px solid #dfe3e8;
+      padding: 20px;
+      border-radius: 0 15px 15px 0;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    }
+
+    .sidebar h2 {
+      font-size: 18px;
       margin-bottom: 10px;
+    }
+
+    .sidebar a {
+      display: block;
+      margin: 10px 0;
+      text-decoration: none;
+      color: #3b5998;
+      font-weight: bold;
+    }
+
+    /* Barra superior flutuante */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 220px;
+      right: 0;
+      height: 50px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 10;
+    }
+
+    .topbar h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    /* Feed central */
+    .feed-container {
+      flex: 1;
+      margin-left: 220px;
+      padding: 80px 40px 40px;
+    }
+
+    .post {
+      background-color: #e8f0fe;
+      border-left: 5px solid #1a73e8;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
       font-family: Arial, sans-serif;
     }
 
-    .post-form button {
-      background-color: #64b5f6;
-      color: white;
-      padding: 8px 16px;
+    .post h3 {
+      margin: 0 0 5px;
+      font-size: 16px;
+    }
+
+    .post p {
+      margin: 0;
+    }
+
+    /* Novo post */
+    .novo-post {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .novo-post textarea {
+      flex: 1;
+      resize: none;
+      padding: 10px;
+      font-family: Arial;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .novo-post button {
+      background-color: #4caf50;
       border: none;
-      border-radius: 10px;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
       cursor: pointer;
       font-weight: bold;
     }
 
-    .post-form button:hover {
-      background-color: #42a5f5;
+    .novo-post button:hover {
+      background-color: #45a049;
     }
   </style>
 </head>
 <body>
 
+  <!-- Sidebar (Menu lateral) -->
+  <div class="sidebar">
+    <h2>🦡 Painel Social</h2>
+    <a href="#">🏠 Início</a>
+    <a href="#">🔍 Explorar</a>
+    <a href="#">💬 Mensagens</a>
+    <a href="#">🔔 Notificações</a>
+  </div>
+
+  <!-- Barra superior -->
   <div class="topbar">
-    🦡 Painel Social do Texugo
+    <h1>Bem-vindo ao TexugoNet</h1>
   </div>
 
-  <div class="container">
-    <!-- Esquerda -->
-    <div class="col left-col menu">
-      <h3>Menu</h3>
-      <ul>
-        <li><a href="#">Início</a></li>
-        <li><a href="#">Explorar</a></li>
-        <li><a href="#">Mensagens</a></li>
-        <li><a href="#">Notificações</a></li>
-      </ul>
+  <!-- Feed de postagens -->
+  <div class="feed-container">
+    <div class="novo-post">
+      <textarea id="conteudoPost" rows="3" placeholder="Compartilhe algo com o mundo..."></textarea>
+      <button onclick="enviarPost()">Novo Post</button>
     </div>
 
-    <!-- Feed Central -->
-    <div class="col feed-col">
-      <button class="new-post-btn" onclick="mostrarFormularioPost()">➕ Novo Post</button>
-
-      <div id="formularioPost" class="post-form" style="display: none;">
-        <textarea id="conteudoPost" rows="4" placeholder="Escreva algo..."></textarea>
-        <button onclick="enviarPost()">Publicar</button>
-      </div>
-
-      <div id="feed">
-        <!-- Posts aparecerão aqui -->
-      </div>
-    </div>
-
-    <!-- Direita -->
-    <div class="col right-col">
-      <div class="form-box">
-        <h3>👤 Criar Conta Anônima</h3>
-        <form onsubmit="salvarUsuario(event)">
-          <input type="text" id="nomeUsuario" placeholder="Nome de usuário" required />
-          <input type="email" placeholder="E-mail (opcional)" />
-          <input type="submit" value="Criar Conta" />
-        </form>
-        <p style="font-size: 12px; color: #777; margin-top: 8px;">
-          *Contas anônimas não têm permissões administrativas.
-        </p>
+    <!-- Posts aparecem aqui -->
+    <div id="feed">
+      <!-- Exemplo de post -->
+      <div class="post">
+        <h3>📣 Anônimo</h3>
+        <p>Esse é um post de exemplo com o visualTX!</p>
       </div>
     </div>
   </div>
 
-  <script>
-    // Salvar nome do usuário
-    function salvarUsuario(e) {
-      e.preventDefault();
-      const nome = document.getElementById("nomeUsuario").value.trim();
-      if (nome) {
-        localStorage.setItem("usuarioAnonimo", nome);
-        alert("Conta criada como: " + nome);
-      }
-    }
-
-    // Mostrar formulário de novo post
-    function mostrarFormularioPost() {
-      const nome = localStorage.getItem("usuarioAnonimo");
-      if (!nome) {
-        alert("Crie uma conta anônima primeiro.");
-        return;
-      }
-      document.getElementById("formularioPost").style.display = "block";
-    }
-
-    // Enviar post e exibir no feed
-    function enviarPost() {
-      const conteudo = document.getElementById("conteudoPost").value.trim();
-      const nome = localStorage.getItem("usuarioAnonimo") || "Anônimo";
-
-      if (conteudo) {
-        const postHTML = `
-          <div class="post">
-            <h3>📣 ${nome}</h3>
-            <p>${conteudo}</p>
-          </div>
-        `;
-        document.getElementById("feed").insertAdjacentHTML("afterbegin", postHTML);
-        document.getElementById("conteudoPost").value = "";
-        document.getElementById("formularioPost").style.display = "none";
-      }
-    }
-  </script>
-
+  <!-- Firebase + script virá aqui depois -->
 </body>
 </html>
